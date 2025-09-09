@@ -26,6 +26,7 @@ app.use(cors({
     'http://localhost:3001',
     'https://wowradio.live',
     'https://www.wowradio.live',
+    "https://admin.richworldsafaris.com",
     'https://admin.wowradio.live',
   ],// change to actual domain in prod
   credentials: true // if you need cookies/auth headers
