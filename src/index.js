@@ -24,10 +24,9 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'http://localhost:3001',
-    'https://wowradio.live',
-    'https://www.wowradio.live',
     "https://admin.richworldsafaris.com",
-    'https://admin.wowradio.live',
+    'https://www.richworldsafaris.com',
+    'https://richworldsafaris.com'
   ],// change to actual domain in prod
   credentials: true // if you need cookies/auth headers
 }));

@@ -35,3 +35,4 @@ exports.updateBookingStatus = async (req, res) => {
     res.status(400).json({ error: err.message })
   }
 }
+  

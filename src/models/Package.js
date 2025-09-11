@@ -38,9 +38,12 @@ const PackageSchema = new mongoose.Schema(
         price: { type: Number },
       },
     ],
-    itinerary: {
-      type: String, // Long text field
-    },
+    itinerary: [
+      {
+        day: { type: String },
+        plan: { type: String },
+      },
+    ],
     specialNotes: {
       type: String,
     },

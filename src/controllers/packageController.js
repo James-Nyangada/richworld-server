@@ -49,7 +49,7 @@ exports.createPackage = async (req, res) => {
       inclusions: inclusions ? JSON.parse(inclusions) : [],
       exclusions: exclusions ? JSON.parse(exclusions) : [],
       hotels: hotels ? JSON.parse(hotels) : [],
-      itinerary,
+      itinerary: itinerary ? JSON.parse(itinerary) : [],
       specialNotes,
       images: uploadedImages,
     });
