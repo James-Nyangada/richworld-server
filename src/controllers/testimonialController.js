@@ -19,7 +19,7 @@ const streamUpload = (buffer) => {
 // @desc Create a new testimonial
 exports.createTestimonial = async (req, res) => {
   try {
-    const { name, email, packageName, rating, title, comment } = req.body;
+    const { name, email, packageName, rating, title, comment, status } = req.body;
 
     let uploadedImages = [];
     if (req.files && req.files.length > 0) {
@@ -35,6 +35,7 @@ exports.createTestimonial = async (req, res) => {
       packageName,
       rating,
       title,
+      status,
       comment,
       images: uploadedImages,
     });
@@ -70,7 +71,7 @@ exports.getTestimonialById = async (req, res) => {
 // @desc Update a testimonial
 exports.updateTestimonial = async (req, res) => {
   try {
-    const { name, email, packageName, rating, title, comment } = req.body;
+    const { name, email, packageName, rating, title, comment, status } = req.body;
 
     let uploadedImages = [];
     if (req.files && req.files.length > 0) {
@@ -89,6 +90,7 @@ exports.updateTestimonial = async (req, res) => {
         rating,
         title,
         comment,
+        status,
         $push: { images: { $each: uploadedImages } },
       },
       { new: true }
@@ -116,3 +118,35 @@ exports.deleteTestimonial = async (req, res) => {
     res.status(500).json({ message: "Error deleting testimonial" });
   }
 };
+
+// @desc Get approved testimonials only
+exports.getApprovedTestimonials = async (req, res) => {
+  try {
+    const testimonials = await Testimonial.find({ status: "approved" }).sort({ createdAt: -1 });
+    res.json(testimonials);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching approved testimonials" });
+  }
+};
+
+// @desc Update only testimonial status
+exports.updateTestimonialStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+    const testimonial = await Testimonial.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true }
+    );
+
+    if (!testimonial) {
+      return res.status(404).json({ message: "Testimonial not found" });
+    }
+
+    res.json(testimonial);
+  } catch (error) {
+    res.status(500).json({ message: "Error updating testimonial status", error: error.message });
+  }
+};
+
+

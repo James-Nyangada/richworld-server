@@ -28,6 +28,11 @@ const TestimonialSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    status: {
+      type: String,
+      enum: ["pending", "approved", "rejected"],
+      default: "pending",
+    },
     comment: {
       type: String,
       required: true,
