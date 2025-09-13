@@ -1,4 +1,5 @@
 const Booking = require("../models/Booking")
+const { sendBookingConfirmation, sendBookingNotification } = require("../utilities/emailService")
 
 // Get all bookings
 exports.getAllBookings = async (req, res) => {
@@ -15,7 +16,10 @@ exports.createBooking = async (req, res) => {
   try {
     const booking = new Booking(req.body)
     await booking.save()
-    res.status(201).json(booking)
+    await sendBookingConfirmation(booking.email, booking)
+    await sendBookingNotification(process.env.COMPANY_EMAIL, booking)
+
+    res.status(201).json({ message: "Booking created and emails sent" })
   } catch (err) {
     res.status(400).json({ error: err.message })
   }
