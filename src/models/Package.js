@@ -15,6 +15,10 @@ const PackageSchema = new mongoose.Schema(
       type: String, // e.g., "3-days", "custom"
       default: "custom",
     },
+    category: {
+      type: String, // e.g., "adventure", "relaxation"
+      default: "safari",
+    },
     price: {
       type: Number,
       required: true,
