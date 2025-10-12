@@ -12,6 +12,7 @@ const blogRoutes = require("./routes/blogRoutes")
 const packageRoutes = require("./routes/packageRoutes")
 const testimonialRoutes = require("./routes/testimonialRoutes")
 const bookingRoutes = require("./routes/bookingRoutes")
+const mpesaRoutes = require("./routes/mpesaRoutes");
 const cors = require('cors');
 
 
@@ -65,6 +66,7 @@ app.use("/api/blogs", blogRoutes) // ✅ register the blog routes
 app.use("/api/packages", packageRoutes);
 app.use("/api/testimonials", testimonialRoutes);
 app.use("/api/bookings", bookingRoutes);
+app.use("/api/mpesa", mpesaRoutes);
 
 
 // root test route

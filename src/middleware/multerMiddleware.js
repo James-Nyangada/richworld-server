@@ -4,11 +4,11 @@ const cloudinary = require("../config/cloudinary");
 
 // restrict file types
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = ["application/pdf", "image/jpeg", "image/png"];
+  const allowedTypes = ["application/pdf", "image/jpeg", "image/png", "image/heic", "image/heif"];
   if (allowedTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error("Invalid file type. Only PDF, JPG and PNG are allowed."));
+    cb(new Error("Invalid file type. Only PDF, JPG, PNG, HEIC and HEIF are allowed."));
   }
 };
 
@@ -20,7 +20,7 @@ const storage = new CloudinaryStorage({
     return {
       folder: "consent_forms",
       public_id: originalName, // 👈 use original filename without extension
-      allowed_formats: ["pdf", "png", "jpg", "jpeg"],
+      allowed_formats: ["pdf", "png", "jpg", "jpeg", "heic", "heif"],
       resource_type: "auto",
       overwrite: true, // Optional: replace if a file with same name exists
     };
